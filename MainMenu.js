@@ -1,28 +1,22 @@
-
-BasicGame.MainMenu = function (game) {
-
-	this.music = null;
-	this.playButton = null;
-
-};
-
-BasicGame.MainMenu.prototype = {
-
-	create: function () {
+FanFrame.MainMenu = class {
+	constructor(game) {
 		
-	},
-
-	update: function () {
+	}
+	create() {
+		this.background = this.add.sprite(0, 0, "mainMenuBackground");
 		
-		//	Do some nice funky main menu effect here
-
-	},
-
-	startGame: function (pointer) {
-
-		//	And start the actual game
-		this.state.start('Game');
-
+		this.playButton = this.add.button(this.world.width/2, this.world.height/2, 'button', this.startGame, this, 0, 0, 1, 0)
+		this.playButton.anchor = new Phaser.Point(0.5, 0.5);
+		this.playText = this.add.text(this.world.width/2, this.world.height/2, "Start Game", {"font": "KennyVector", "fontSize": 20});
+		this.playText.anchor = new Phaser.Point(0.5, 0.5);
 	}
 
-};
+	update() {
+		
+	}
+
+	startGame(pointer) {
+		/* Start game */
+		this.state.start('Game');
+	}
+}

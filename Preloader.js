@@ -1,36 +1,31 @@
+FanFrame.Preloader = class {
+	constructor(game) {
+		this.preloadBar = null;
+	}
+	
+	preload() {
 
-BasicGame.Preloader = function (game) {
-
-	this.background = null;
-	this.preloadBar = null;
-
-	this.ready = false;
-
-};
-
-BasicGame.Preloader.prototype = {
-
-	preload: function () {
-
-		//	These are the assets we loaded in Boot.js
-		//	A nice sparkly background and a loading progress bar
+		/* Add a loading background and bar */
 		this.background = this.add.sprite(0, 0, 'preloaderBackground');
-		this.preloadBar = this.add.sprite(300, 400, 'preloaderBar');
+		this.background.width = this.world.width;
+		this.background.height = this.world.height;
+		
+		this.preloadBar = this.add.sprite(400, 300, 'preloaderBar');
+		this.preloadBar.anchor = new Phaser.Point(0.5, 0.5);
 
-		//	This sets the preloadBar sprite as a loader sprite.
-		//	What that does is automatically crop the sprite from 0 to full-width
-		//	as the files below are loaded in.
+		/* Set loading bar */
 		this.load.setPreloadSprite(this.preloadBar);
 
-		//	Here we load the rest of the assets our game needs.
-	},
-
-	create: function () {
-
-		//	Once the load has finished we disable the crop because we're going to sit in the update loop for a short while as the music decodes
-		this.preloadBar.cropEnabled = false;
+		/* Load Main Menu assets */
+		this.load.image("mainMenuBackground", "assets/mainMenu/background.png");
 		
-		this.state.start('MainMenu');
-
+		/* Load UI assets */
+		this.load.spritesheet("button", "assets/Ui/button.png", 190, 49, );
 	}
-};
+
+	create() {
+
+		this.preloadBar.cropEnabled = false;
+		this.state.start('MainMenu');
+	}
+}
